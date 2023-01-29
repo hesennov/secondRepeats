@@ -1,98 +1,13 @@
 const express = require("express");
-let data = require("./data/data");
-let dataVikings = require("./data/data2");
+const enterpenurRouter = require("./routers/enterpenurRouter");
+const vikingsRouter = require("./routers/vikingsRouter");
 const server = express();
 server.use(express.json());
+server.use("/enterpenur", enterpenurRouter);
+server.use("/vikings", vikingsRouter);
 
 server.get("/", (req, res) => {
   res.send("Hesennov buissnes solutions");
-});
-
-//get methodu
-server.get("/enterpenur", (req, res) => {
-  //   res.json(data);
-  res.status(200).json(data);
-});
-
-//POST enterpenur
-let next_id = 4;
-
-server.post("/enterpenur", (req, res) => {
-  // console.log(req.body);
-  let newenterpenur = req.body;
-  newenterpenur.id = next_id;
-  next_id++;
-  data.push(newenterpenur);
-  res.status(201).json(newenterpenur);
-});
-
-//deleted enterpenur
-server.delete("/enterpenur/:id", (req, res) => {
-  let deletedenterpenurid = parseInt(req.params.id);
-  let deletedenterepnur = data.find(
-    (enterpenur) => enterpenur.id === deletedenterpenurid
-  );
-  console.log(deletedenterepnur);
-  if (deletedenterepnur) {
-    data = data.filter((updatedData) => updatedData !== deletedenterepnur);
-    res.status(204).end();
-  } else {
-    res.status(404).json({ errorMesaage: "hgf" });
-  }
-});
-
-//detail wiev
-server.get("/enterpenur/:id", (req, res) => {
-  const { id } = req.params;
-  const enterpenurfilter = data.find(
-    (enterpenur) => enterpenur.id === parseInt(id)
-  );
-  if (enterpenurfilter) {
-    res.status(200).json(enterpenurfilter);
-  } else {
-    res.status(404).send("aradiginiz irisimci bulunamadi...");
-  }
-});
-
-server.get("/vikings", (req, res) => {
-  res.status(200).json(dataVikings);
-});
-
-// /vikings detail viev
-server.get("/vikings/:id", (req, res) => {
-  const { id } = req.params;
-  const filterviking = dataVikings.find((viking) => viking.id === parseInt(id));
-
-  if (filterviking) {
-    res.status(200).json(filterviking);
-  } else {
-    res.status(404).send("siktir+");
-  }
-});
-
-//delete vikings
-server.delete("/vikings/:id", (req, res) => {
-  let vikingId = parseInt(req.params.id);
-  let deletedvikings = dataVikings.find((del) => del.id === vikingId);
-  console.log(deletedvikings);
-  if (deletedvikings) {
-    dataVikings = dataVikings.filter(
-      (updatedData) => updatedData !== deletedvikings
-    );
-    res.status(204).end();
-  } else {
-    res.status(404).json({ errorMessage: "siktir" });
-  }
-});
-
-//post vikings
-let nextId = 4;
-server.post("/vikings", (req, res) => {
-  let newVikings = req.body;
-  newVikings.id = next_id;
-  nextId++;
-  dataVikings.push(newVikings);
-  res.status(201).json(dataVikings);
 });
 
 // put methodu
