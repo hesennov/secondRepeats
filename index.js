@@ -1,8 +1,13 @@
 const express = require("express");
 const enterpenurRouter = require("./routers/enterpenurRouter");
 const vikingsRouter = require("./routers/vikingsRouter");
+const logger = require("./middlewares/logger");
+const errorHandling = require("./middlewares/errorHandling");
+
 const server = express();
 server.use(express.json());
+server.use(logger);
+
 server.use("/enterpenur", enterpenurRouter);
 server.use("/vikings", vikingsRouter);
 
@@ -10,6 +15,7 @@ server.get("/", (req, res) => {
   res.send("Hesennov buissnes solutions");
 });
 
+server.use(errorHandling);
 // put methodu
 
 // server.put("/enterpenur/:id", (req, res) => {
