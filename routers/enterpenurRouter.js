@@ -10,13 +10,20 @@ router.get("/", (req, res) => {
 //POST enterpenur
 let next_id = 4;
 
-router.post("/", (req, res) => {
+router.post("/", (req, res, next) => {
   // console.log(req.body);
   let newenterpenur = req.body;
-  newenterpenur.id = next_id;
-  next_id++;
-  data.push(newenterpenur);
-  res.status(201).json(newenterpenur);
+  if (newenterpenur.name && newenterpenur.surname) {
+    newenterpenur.id = next_id;
+    next_id++;
+    data.push(newenterpenur);
+    res.status(201).json(newenterpenur);
+  } else {
+    next({
+      statusCode: 400,
+      errorMesaage: "girisimci eklemek bilgileri tam giriniz",
+    });
+  }
 });
 
 //deleted enterpenur
@@ -47,4 +54,4 @@ router.get("/:id", (req, res) => {
   }
 });
 
-module.exports = router
+module.exports = router;
