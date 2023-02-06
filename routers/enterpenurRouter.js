@@ -40,7 +40,7 @@ router.delete("/:id", (req, res) => {
     res.status(404).json({ errorMesaage: "hgf" });
   }
 });
-
+//baslangic
 //detail wiev
 router.get("/:id", (req, res) => {
   const { id } = req.params;
