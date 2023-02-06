@@ -28,6 +28,7 @@ server.use(errorHandling);
 //     findenterpenur.id = enterpenurValue.id;
 //     console.log(findenterpenur.surname);
 
+//console.log(req)
 //     res.status(200);
 //   } else {
 //     res.status(404).send(errorMessage, "There is no actor for update");
