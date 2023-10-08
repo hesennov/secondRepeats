@@ -13,8 +13,8 @@ server.use("/vikings", vikingsRouter);
 
 server.get("/", (req, res) => {
   res.send("Hesennov buissnes solutions");
+console.log(req)
 });
-
 server.use(errorHandling);
 // put methodu
 
@@ -27,6 +27,7 @@ server.use(errorHandling);
 //     findenterpenur.surname = enterpenurValue.surname;
 //     findenterpenur.id = enterpenurValue.id;
 //     console.log(findenterpenur.surname);
+
 
 //console.log(req)
 //     res.status(200);
